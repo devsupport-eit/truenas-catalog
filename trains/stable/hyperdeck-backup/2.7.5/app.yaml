@@ -1,0 +1,24 @@
+name: hyperdeck-backup
+train: stable
+version: 2.7.5
+app_version: "2.7.5"
+title: "HyperDeck Backup Manager"
+description: "Professional backup solution for Blackmagic HyperDeck recorders. Automatically backs up video recordings to NAS storage, Google Drive, SFTP servers, and USB drives."
+home: "https://www.entertainmentit.co/hyperdeck-backup"
+sources:
+  - "https://github.com/devsupport-eit/hyperdeck-backup"
+maintainers:
+  - name: "Entertainment IT"
+    email: "devsupport@entertainmentit.co"
+    url: "https://www.entertainmentit.co"
+icon: "https://raw.githubusercontent.com/devsupport-eit/truenas-catalog/main/trains/stable/hyperdeck-backup/icon.png"
+keywords:
+  - hyperdeck
+  - blackmagic
+  - backup
+  - video
+  - recording
+  - broadcast
+  - media
+annotations:
+  min_scale_version: "24.04"

@@ -1,0 +1,12 @@
+{
+  "2.7.5": {
+    "healthy": true,
+    "supported": true,
+    "healthy_error": null,
+    "version": "2.7.5",
+    "human_version": "2.7.5",
+    "app_readme": "Professional backup solution for Blackmagic HyperDeck recorders. Automatically backs up recordings to NAS, Google Drive, SFTP servers, and USB drives.",
+    "detailed_readme": "HyperDeck Backup Manager automates the process of backing up video recordings from Blackmagic HyperDeck devices to multiple destinations. Requires a license key from Entertainment IT.",
+    "changelog": "v2.7.5: Added license system, improved Media I/O browsers, comprehensive PDF user guide with installation addendum."
+  }
+}

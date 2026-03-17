@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  hyperdeck-backup:
+    image: ghcr.io/devsupport-eit/hyperdeck-backup:2.7.5
+    container_name: hyperdeck-backup
+    restart: unless-stopped
+    ports:
+      - "${web_port:-8700}:8080"
+    volumes:
+      - "${data_path}:/app/data"
+      - "${config_path}:/app/config"
+      - "${recordings_path}:/mnt/nas:rw"
+    environment:
+      - TZ=${timezone:-America/New_York}
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  hyperdeck-manager:
+    image: ghcr.io/devsupport-eit/hyperdeck-manager:2.7.5
+    container_name: hyperdeck-manager
+    restart: unless-stopped
+    profiles:
+      - manager
+    ports:
+      - "${manager_port:-8701}:8081"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=${timezone:-America/New_York}
+    depends_on:
+      - hyperdeck-backup

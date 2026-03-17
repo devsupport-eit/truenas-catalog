@@ -1,0 +1,12 @@
+{
+  "label": "Entertainment IT",
+  "description": "Professional media and broadcast software by Entertainment IT",
+  "location": "https://github.com/devsupport-eit/truenas-catalog",
+  "preferred_trains": ["stable"],
+  "trains": {
+    "stable": {
+      "label": "Stable",
+      "description": "Production-ready releases"
+    }
+  }
+}

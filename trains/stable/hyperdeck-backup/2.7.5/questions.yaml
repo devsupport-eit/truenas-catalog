@@ -1,0 +1,153 @@
+groups:
+  - name: "License"
+    description: "License configuration"
+  - name: "Network"
+    description: "Port configuration"
+  - name: "Storage"
+    description: "Storage paths and volume mounts"
+  - name: "General"
+    description: "General settings"
+
+questions:
+
+  # ── License ──────────────────────────────────────────────────
+  - variable: license_note
+    label: "License Required"
+    description: "This application requires a license key from Entertainment IT. Start a free 7-day trial or purchase at entertainmentit.co/hyperdeck-backup"
+    group: "License"
+    type: string
+    default: "Enter your license key after installation in the app's web UI"
+    immutable: true
+
+  # ── Network ──────────────────────────────────────────────────
+  - variable: web_port
+    label: "Web UI Port"
+    description: "Port to access the HyperDeck Backup Manager web interface"
+    group: "Network"
+    schema:
+      type: int
+      default: 8700
+      min: 1024
+      max: 65535
+      required: true
+
+  - variable: manager_enabled
+    label: "Install HyperDeck Manager (companion app)"
+    description: "Installs the companion Manager app for Docker management, log viewing, and HyperDeck debugging"
+    group: "Network"
+    schema:
+      type: boolean
+      default: true
+
+  - variable: manager_port
+    label: "Manager Web UI Port"
+    description: "Port to access the HyperDeck Manager companion app"
+    group: "Network"
+    schema:
+      type: int
+      default: 8701
+      min: 1024
+      max: 65535
+      show_if: [["manager_enabled", "=", true]]
+
+  # ── Storage ──────────────────────────────────────────────────
+  - variable: recordings_path
+    label: "Recordings Storage Path"
+    description: "Path to your TrueNAS dataset where video recordings will be stored (e.g., /mnt/YourPool/Recordings)"
+    group: "Storage"
+    schema:
+      type: hostpath
+      required: true
+
+  - variable: data_path
+    label: "Application Data Path"
+    description: "Path to store the application database and settings. Must persist across restarts."
+    group: "Storage"
+    schema:
+      type: hostpath
+      default: ""
+      required: true
+
+  - variable: config_path
+    label: "Config Path"
+    description: "Path to store Google Drive OAuth credentials. Must persist across restarts."
+    group: "Storage"
+    schema:
+      type: hostpath
+      default: ""
+      required: true
+
+  - variable: usb_drives_enabled
+    label: "Enable USB Drive Mounts"
+    description: "Mount USB drives for external backup. Drives must be mounted on TrueNAS first."
+    group: "Storage"
+    schema:
+      type: boolean
+      default: false
+
+  - variable: usb_drive1_path
+    label: "USB Drive 1 Host Path"
+    description: "TrueNAS path to USB drive 1 (e.g., /mnt/usb_drives/drive1)"
+    group: "Storage"
+    schema:
+      type: hostpath
+      default: "/mnt/usb_drives/drive1"
+      show_if: [["usb_drives_enabled", "=", true]]
+
+  - variable: usb_drive2_path
+    label: "USB Drive 2 Host Path"
+    description: "TrueNAS path to USB drive 2"
+    group: "Storage"
+    schema:
+      type: hostpath
+      default: "/mnt/usb_drives/drive2"
+      show_if: [["usb_drives_enabled", "=", true]]
+
+  - variable: usb_drive3_path
+    label: "USB Drive 3 Host Path"
+    description: "TrueNAS path to USB drive 3"
+    group: "Storage"
+    schema:
+      type: hostpath
+      default: "/mnt/usb_drives/drive3"
+      show_if: [["usb_drives_enabled", "=", true]]
+
+  - variable: usb_drive4_path
+    label: "USB Drive 4 Host Path"
+    description: "TrueNAS path to USB drive 4"
+    group: "Storage"
+    schema:
+      type: hostpath
+      default: "/mnt/usb_drives/drive4"
+      show_if: [["usb_drives_enabled", "=", true]]
+
+  # ── General ──────────────────────────────────────────────────
+  - variable: timezone
+    label: "Timezone"
+    description: "Timezone for all timestamps in the application"
+    group: "General"
+    schema:
+      type: string
+      default: "America/New_York"
+      required: true
+      enum:
+        - value: "America/New_York"
+          description: "Eastern Time"
+        - value: "America/Chicago"
+          description: "Central Time"
+        - value: "America/Denver"
+          description: "Mountain Time"
+        - value: "America/Los_Angeles"
+          description: "Pacific Time"
+        - value: "America/Anchorage"
+          description: "Alaska Time"
+        - value: "Pacific/Honolulu"
+          description: "Hawaii Time"
+        - value: "Europe/London"
+          description: "UK / GMT"
+        - value: "Europe/Paris"
+          description: "Central European"
+        - value: "Asia/Tokyo"
+          description: "Japan"
+        - value: "Australia/Sydney"
+          description: "Australia Eastern"
